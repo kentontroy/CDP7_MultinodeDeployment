@@ -1,6 +1,32 @@
 ```
-You may encounter this error when running:
+For reference: https://docs.ansible.com/ansible/latest/user_guide/playbooks_debugger.html#enabling-the-debugger-with-the-debugger-keyword
 
+ANSIBLE_ENABLE_TASK_DEBUGGER=True
+
+Inside of site.yml, for a specific module:
+- name: INSTALL MIT KDC CLIENT
+  hosts: cdpdc
+  become: yes
+  debugger: on_failed
+
+
+[54.242.238.240] TASK: install MIT KDC client (debug)> p task
+TASK: install MIT KDC client
+[54.242.238.240] TASK: install MIT KDC client (debug)> p task.args
+{'name': 'install_krb5/client'}
+[54.242.238.240] TASK: install MIT KDC client (debug)> p task_vars
+{'ansible_all_ipv4_addresses': ['10.0.18.195'],
+ 'ansible_all_ipv6_addresses': ['fe80::8ee:7fff:feb9:d875'],
+ 'ansible_apparmor': {'status': 'disabled'},
+ .....
+ .....
+ 
+ 
+ 
+```
+
+```
+You may encounter a failure of the Python 2.7 pip package to recognize an encoding paramater for UTF-8 in I/O methods:
 
 ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" \
   -e "cluster=config/stock.cluster.krb.yml" \
