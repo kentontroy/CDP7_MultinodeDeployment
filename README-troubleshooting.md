@@ -10,6 +10,8 @@ Inside of site.yml, for a specific module:
   debugger: on_failed
 
 
+'kdavis' is undefined\n\nThe error appears to be in '/home/kdavis/Documents/Ansible/CDP7_MultinodeDeployment/mn-script/site.yml': line 42, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: install MIT KDC client\n      ^ here\n"}
+
 [54.242.238.240] TASK: install MIT KDC client (debug)> p task
 TASK: install MIT KDC client
 [54.242.238.240] TASK: install MIT KDC client (debug)> p task.args
@@ -18,7 +20,6 @@ TASK: install MIT KDC client
 {'ansible_all_ipv4_addresses': ['10.0.18.195'],
  'ansible_all_ipv6_addresses': ['fe80::8ee:7fff:feb9:d875'],
  'ansible_apparmor': {'status': 'disabled'},
- .....
  .....
  
  
