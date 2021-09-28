@@ -1,7 +1,9 @@
 ```
 For reference: https://docs.ansible.com/ansible/latest/user_guide/playbooks_debugger.html#enabling-the-debugger-with-the-debugger-keyword
 
-ANSIBLE_ENABLE_TASK_DEBUGGER=True
+export ANSIBLE_ENABLE_TASK_DEBUGGER=False
+export ANSIBLE_DEBUG=true 
+export ANSIBLE_VERBOSITY=4
 
 Inside of site.yml, for a specific module:
 - name: INSTALL MIT KDC CLIENT
@@ -69,7 +71,33 @@ Successfully installed pip-20.3.4 wheel-0.37.0
 ```
 
 ```
+TASK [install_krb5/client : install krb5] 
+**********************************************************************************************************************
+The authenticity of host '34.224.212.186 (34.224.212.186)' can't be established.
+ED25519 key fingerprint is SHA256:HJURd0uGTQKgGGAat/vHWlFPFsFIcqgvC/bI4VNTF2I.
 This key is not known by any other names
+The authenticity of host '54.197.60.47 (54.197.60.47)' can't be established.
+ED25519 key fingerprint is SHA256:1p53QBG3f4WupN1fFdiKuQfUyKBiZsYiER5wSJtxa2s.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+
+TASK [cdpdc_cm_server : check until _api_command exits] **********************************************************************************************************************
+PLAY RECAP 
+34.224.212.186             : ok=30   changed=16   unreachable=0    failed=0    skipped=0    rescued=0    ignored=1   
+54.162.205.115             : ok=3    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+54.197.60.47               : ok=30   changed=17   unreachable=0    failed=0    skipped=0    rescued=0    ignored=1   
+54.204.116.225             : ok=88   changed=12   unreachable=0    failed=1    skipped=9    rescued=0    ignored=3   
+54.227.12.51               : ok=30   changed=16   unreachable=0    failed=0    skipped=0    rescued=0    ignored=1   
+localhost                  : ok=24   changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
+
+```
+
+```
+TASK [cdpdc_cm_server : check until _api_command exits] ****************************************************************************************************************************************************
+FAILED - RETRYING: check until _api_command exits (60 retries left).
+fatal: [54.204.116.225]: FAILED! => {"attempts": 2, "cache_control": "no-cache, no-store, max-age=0, must-revalidate", "changed": false, "connection": "close", "content_type": "application/json;charset=utf-8", "cookies": {"SESSION": "8d96c202-b230-409a-82e0-e45af17606d9"}, "cookies_string": "SESSION=8d96c202-b230-409a-82e0-e45af17606d9", "date": "Tue, 28 Sep 2021 12:54:32 GMT", "elapsed": 0, "expires": "Thu, 01 Jan 1970 00:00:00 GMT", "failed_when_result": true, "json": {"active": false, "canRetry": true, "children": {"items": []}, "endTime": "2021-09-28T12:54:25.601Z", "id": 31, "name": "GlobalHostInstall", "resultDataUrl": "https://ip-10-0-22-86.ec2.internal:7183/cmf/command/31/download", "resultMessage": "Failed to complete installation.", "startTime": "2021-09-28T12:54:20.579Z", "success": false}, "msg": "OK (unknown bytes)", "pragma": "no-cache", "redirected": false, "set_cookie": "SESSION=8d96c202-b230-409a-82e0-e45af17606d9;Path=/;Secure;HttpOnly", "status": 200, "strict_transport_security": "max-age=31536000 ; includeSubDomains", "url": "https://localhost:7183/api/v40/commands/31", "x_content_type_options": "nosniff", "x_frame_options": "DENY", "x_xss_protection": "1; mode=block"}
+
+No provider available for Unknown key file
+
+scp /home/kdavis/Documents/Demos/creds/kdavis-key-for-ansible.pem centos@54.163.28.224:/home/centos/.ssh/id_rsa
 
 ```
