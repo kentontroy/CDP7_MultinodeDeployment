@@ -67,3 +67,9 @@ Installing collected packages: pip, wheel
 Successfully installed pip-20.3.4 wheel-0.37.0
 
 ```
+
+```
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+
+```
