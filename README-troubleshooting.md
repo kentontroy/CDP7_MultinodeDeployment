@@ -31,13 +31,18 @@ Inside of site.yml, for a specific module:
 You may encounter a failure of the Python 2.7 pip package to recognize an encoding paramater for UTF-8 in 
 I/O methods:
 
-ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" \
+% ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" \
   -e "cluster=config/stock.cluster.krb.yml" \
   -e "vault=/home/kdavis/keys.vault" \
-  -e "cdpdc_teardown=kdavis-10042021" \
+  -e "cdpdc_teardown=kdavis-10052021" \
   -e "public_key=kdavis" \
-  -e "repo_username=<USER NAME>" \
-  -e "repo_password=<PASSWORD>"
+  -e "repo_username=<CHANGE ME>" \
+  -e "repo_password=<CHANGE ME>" \
+  -e "cm_major_version=7" \
+  -e "cm_full_version=7.4.4" \
+  -e "cdh_major_version=7" \
+  -e "cdh_full_version=7.1.7" \
+  -e "cdh_abbreviated_parcel=7.1.7-1.cdh7.1.7.p0.15945976"
 
 TASK [install_mariadb : install PyMySQL] 
 *********************************************************************************************************************
