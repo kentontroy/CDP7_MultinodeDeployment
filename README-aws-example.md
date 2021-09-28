@@ -3,6 +3,14 @@
 Note, tenant VPCs are not public so ensure that cluster nodes have a publicly accessible route 
 via an IGW (i.e. if relevant to your setup)
 
+Ensure that you use the id's not the alias names in the Ansible script.
+
+In this example, the kdavis-vpc has a subnet which contains a route table having the following
+entries for destination and target:
+
+10.0.0.0/16	local
+0.0.0.0/0	igw-0ea7a2aff7a0f30c1
+
 AWS IAM Console
 ---------------
 Create a user
