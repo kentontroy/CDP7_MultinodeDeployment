@@ -9,8 +9,8 @@ Now, you can specify the versions of CDP and CM desired at the command line by:
   -e "vault=/home/kdavis/keys.vault" \
   -e "cdpdc_teardown=kdavis-10052021" \
   -e "public_key=kdavis" \
-  -e "repo_username=70225f50-3c5b-43e7-b8f3-01cff397defa" \
-  -e "repo_password=e8501e20dc14" \
+  -e "repo_username=<CHANGE ME>" \
+  -e "repo_password=<CHANGE ME>" \
   -e "cm_major_version=7" \
   -e "cm_full_version=7.4.4" \
   -e "cdh_major_version=7" \
