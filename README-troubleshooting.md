@@ -2,15 +2,15 @@
 ```
 Ansible use Jinja2 templating for variables and dynamic expressions.
 
-Jinja2 doesn't behave very well with variables containing underscores. For example, over an hour was lost trying to understand 
-the reason behind an undefined variable. See how to debug below. The ultimate reason was due to a PEM file being used that had 
-dashes in the name.
+Jinja2 doesn't behave very well with variables containing underscores. For example, over an hour was lost
+trying to understand the reason behind an undefined variable. See how to debug below. The ultimate reason 
+was due to a PEM file being used that had dashes in the name.
 ```
 
 ## Debugging
 ```
-Debugging distributed processes is not an easy task. Consider the following environment variables to make it easier in Ansible. 
-Also see for reference: 
+Debugging distributed processes is not an easy task. Consider the following environment variables to make 
+it easier in Ansible. Also see for reference: 
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_debugger.html#enabling-the-debugger-with-the-debugger-keyword
 
 export ANSIBLE_ENABLE_TASK_DEBUGGER=True
@@ -28,7 +28,8 @@ Inside of site.yml, for a specific module:
 
 ##  pip Encoding parameter not recognized
 ```
-You may encounter a failure of the Python 2.7 pip package to recognize an encoding paramater for UTF-8 in I/O methods:
+You may encounter a failure of the Python 2.7 pip package to recognize an encoding paramater for UTF-8 in 
+I/O methods:
 
 ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" \
   -e "cluster=config/stock.cluster.krb.yml" \
