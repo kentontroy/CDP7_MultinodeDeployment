@@ -36,8 +36,8 @@ ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" \
   -e "vault=/home/kdavis/keys.vault" \
   -e "cdpdc_teardown=kdavis-10042021" \
   -e "public_key=kdavis" \
-  -e "repo_username=70225f50-3c5b-43e7-b8f3-01cff397defa" \
-  -e "repo_password=e8501e20dc14"
+  -e "repo_username=<USER NAME>" \
+  -e "repo_password=<PASSWORD>"
 
 TASK [install_mariadb : install PyMySQL] 
 *********************************************************************************************************************
