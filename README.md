@@ -7,7 +7,7 @@ CDP DC will be installed with full security (Kerberos,TLS and KMS)
 
 Forked from Harsh's last updates on June 20, 2020 --
 
-See the following guides for forked updates --
+See the following guides for forked updates -- <br>
 README-changes-in-forked-version.md <br>
 README-troubleshooting.md <br>
 README-aws-example.md <br>
