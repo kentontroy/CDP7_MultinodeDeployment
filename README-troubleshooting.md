@@ -35,7 +35,7 @@ ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" \
   -e "cluster=config/stock.cluster.krb.yml" \
   -e "vault=/home/kdavis/keys.vault" \
   -e "cdpdc_teardown=kdavis-10042021" \
-  -e "public_key=kdavis-key-for-ansible" \
+  -e "public_key=kdavis" \
   -e "repo_username=70225f50-3c5b-43e7-b8f3-01cff397defa" \
   -e "repo_password=e8501e20dc14"
 
