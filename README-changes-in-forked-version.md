@@ -4,7 +4,7 @@ Ansible variables were used in a new version of ./config/stock.cluster.krb.yml
 
 Now, you can specify the versions of CDP and CM desired at the command line by:
 
-ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" \
+% ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" \
   -e "cluster=config/stock.cluster.krb.yml" \
   -e "vault=/home/kdavis/keys.vault" \
   -e "cdpdc_teardown=kdavis-10052021" \
