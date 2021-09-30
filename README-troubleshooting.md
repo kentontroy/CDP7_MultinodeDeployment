@@ -94,3 +94,29 @@ The authenticity of host '54.197.60.47 (54.197.60.47)' can't be established.
 ED25519 key fingerprint is SHA256:1p53QBG3f4WupN1fFdiKuQfUyKBiZsYiER5wSJtxa2s.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? 
 ```
+
+```
+sudo wget https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+rpm -ivh pgdg-redhat-repo-latest.noarch.rpm
+ls -al /etc/yum.repos.d
+
+Change /etc/yum.conf to include:
+sslverify=false
+
+pgsql script
+ignore_errors: yes
+
+
+$ wget https://3338b69d-d915-4f9b-af74-15593343f6d3:fb8980e42c4e@archive.cloudera.com/p/cm7/7.4.4/redhat7/yum/RPMS/x86_64/cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
+
+sudo rpm -ivh cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm 
+
+vi roles/cdpdc_cm_server/tasks/redhat.yml
+---
+- name: Download CM repo file
+  get_url:
+    url: "{{ cdpdc.cm.repo_file }}"     dest: /etc/yum.repos.d/   tags:     - skip - name: Install the Cloudera Manager Server packages   yum:     name:        - cloudera-manager-agent        - cloudera-manager-daemons        - cloudera-manager-server     state: latest --skip=
+
+
+
+
