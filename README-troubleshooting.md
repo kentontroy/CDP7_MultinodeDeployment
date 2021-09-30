@@ -107,7 +107,7 @@ pgsql script
 ignore_errors: yes
 
 
-$ wget https://3338b69d-d915-4f9b-af74-15593343f6d3:fb8980e42c4e@archive.cloudera.com/p/cm7/7.4.4/redhat7/yum/RPMS/x86_64/cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
+$ wget https://<USERNAME>:<PASSWORD>/p/cm7/7.4.4/redhat7/yum/RPMS/x86_64/cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
 
 sudo rpm -ivh cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm 
 
