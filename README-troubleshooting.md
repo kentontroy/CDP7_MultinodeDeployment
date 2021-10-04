@@ -97,6 +97,8 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 
 ## Failure to get the latest certificate for Yum repo for PostgreSQL
 ```
+ "msg": "Failure downloading https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm, Request failed: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:618)>"
+
 If a certificate does not download or if a Yum repository needs to be manually installed on the Master node, consider:
 
 % ssh centos@54.242.238.240
