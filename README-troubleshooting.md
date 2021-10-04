@@ -95,7 +95,7 @@ ED25519 key fingerprint is SHA256:1p53QBG3f4WupN1fFdiKuQfUyKBiZsYiER5wSJtxa2s.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? 
 ```
 
-## Failure to get the latest certificate for Yum repo for PostGresql
+## Failure to get the latest certificate for Yum repo for PostgreSQL
 ```
 If a certificate does not download or if a Yum repository needs to be manually installed on the Master node, consider:
 
@@ -111,7 +111,7 @@ Then, inside of the Docker container, ensure that you are in the CDP7_MultinodeD
 Add a tag called "skipped_manually_done" to force the Ansible script to bypass the installation of the Yum repo
 because it was done manually:
 
-vi scripts/pgsql.yml
+% vi scripts/pgsql.yml
 - name: install PGSQL server
   yum:
     name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
@@ -119,32 +119,50 @@ vi scripts/pgsql.yml
   tags:
     - skipped_manually_done
   
+% ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" \
+  -e "cluster=config/stock.cluster.krb.yml" \
+  -e "vault=/home/kdavis/keys.vault" \
+  -e "cdpdc_teardown=kdavis-10052021" \
+  -e "public_key=kdavis" \
+  -e "repo_username=<CHANGE ME>" \
+  -e "repo_password=<CHANGE ME>" \
+  -e "cm_major_version=7" \
+  -e "cm_full_version=7.4.4" \
+  -e "cdh_major_version=7" \
+  -e "cdh_full_version=7.1.7" \
+  -e "cdh_abbreviated_parcel=7.1.7-1.cdh7.1.7.p0.15945976" \
+  --skip-tags "skipped_manually_done"
+  
+Essentially, when failures occur in downloading an RPM, you manually install the RPM and then find the scripts where
+Ansible performs this action. Once found, use a tag to skip the Ansible task (or, ignore_errors: yes). 
 
+As another example,for one deployment the Cloudera Manager packages failed to download on one of the cluster nodes due 
+to a network issue.  The problem was identified by using DEBUG mode as described above and by downloading the errors that 
+Cloudera Manager producers for each node during install. 
 
-
-```
+For this case, you could SSH into the specific cluster node:
 
 $ wget https://<USERNAME>:<PASSWORD>/p/cm7/7.4.4/redhat7/yum/RPMS/x86_64/cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
+$ sudo rpm -ivh cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
 
-sudo rpm -ivh cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm 
+Then, in the Docker container, add a tag so that Ansible skips this task when re-run.
 
 vi roles/cdpdc_cm_server/tasks/redhat.yml
----
+
 - name: Download CM repo file
   get_url:
     url: "{{ cdpdc.cm.repo_file }}"
     dest: /etc/yum.repos.d/
-    tags:
-      - skip
-      - name: Install the Cloudera Manager Server packages
+  tags:
+    - skipped_manually_done
+
+- name: Install the Cloudera Manager Server packages
   yum:
-    name:       
-      - cloudera-manager-agent 
-      - cloudera-manager-daemons 
+    name:
+      - cloudera-manager-agent
+      - cloudera-manager-daemons
       - cloudera-manager-server
-        state: latest
-  --skip=
-
-
+    state: latest  
+```
 
 
