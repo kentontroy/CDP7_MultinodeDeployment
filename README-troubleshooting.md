@@ -105,8 +105,8 @@ If a certificate does not download or if a Yum repository needs to be manually i
 [centos@ip-10-0-18-195 ~]$ sudo su 
 [root@ip-10-0-18-195 centos]# wget --no-check-certificate https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 [root@ip-10-0-18-195 centos]# rpm -ivh pgdg-redhat-repo-latest.noarch.rpm
-[root@ip-10-0-18-195 centos]# vi /etc/yum.repos.d
-Change /etc/yum.conf to include:
+[root@ip-10-0-18-195 centos]# vi /etc/yum.conf
+Add the following line:
 sslverify=false
 
 Then, inside of the Docker container, ensure that you are in the CDP7_MultinodeDeployment/mn-script directory.
@@ -141,10 +141,30 @@ Ansible performs this action. Once found, use a tag to skip the Ansible task (or
 As another example,for one deployment the Cloudera Manager packages failed to download on one of the cluster nodes due 
 to a network issue.  The problem was identified by using DEBUG mode as described above and by downloading the errors that 
 Cloudera Manager producers for each node during install. 
+.....
+        "resultDataUrl": "https://ip-10-0-0-200.ec2.internal:7183/cmf/command/15/download",
+        "resultMessage": "Failed to complete installation.",
+        "startTime": "2021-10-04T18:45:56.546Z",
+        "success": false
+    },
+    "msg": "OK (unknown bytes)",
+    "pragma": "no-cache",
+    "redirected": false,
+    "set_cookie": "SESSION=eb66c4c3-2d40-4f1e-af17-9be7410e13c3; Path=/; Secure; HttpOnly",
+    "status": 200,
+    "strict_transport_security": "max-age=31536000 ; includeSubDomains",
+    "url": "https://localhost:7183/api/v40/commands/15",
+    "x_content_type_options": "nosniff",
+    "x_frame_options": "DENY",
+    "x_xss_protection": "1; mode=block"
+}
+[54.242.238.240] TASK: cdpdc_cm_server : check until _api_command exits (debug)>
+......
 
 For this case, you could SSH into the specific cluster node:
 
-$ wget https://<USERNAME>:<PASSWORD>/p/cm7/7.4.4/redhat7/yum/RPMS/x86_64/cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
+$ wget --user <USERNAME> --password <PASSWORD> https://archive.cloudera.com/p/cm7/7.4.4/redhat7/yum/RPMS/x86_64/cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
+
 $ sudo rpm -ivh cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
 
 Then, in the Docker container, add a tag so that Ansible skips this task when re-run.
