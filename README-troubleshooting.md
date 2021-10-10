@@ -197,5 +197,27 @@ vi roles/cdpdc_cm_server/tasks/redhat.yml
       - cloudera-manager-server
     state: latest  
 ```
+## After installation, warnings within the CM Console
+```
+To support Phoenix, HBase Write-Ahead Log Codec Class should be set to:
+"org.apache.hadoop.hbase.regionserver.wal.IndexedWALEditCodec"
 
+Kafka is only installed on one node by default. If this is acceptable, then
+change the transaction and offset topics' replication factor to 1 since
+there is only one broker. Then, suppress the warning about doing so.
 
+For performance reasons, you may want to avoid enabling authentication and 
+integrity checks for DataNode Transfers. Since the cluster uses Auto TLS
+as part of the Ansible configuration, CM reports a warning about having
+a Secure Node configuration without using DataNode Transfer protection.
+You may consider simply disabling this warning.
+
+The Ansible setup configures a KDC server running on the Cloudera
+Manager / Master node by default. CM will always report this node as 
+having a stale Kerberos configuration since it's services can't be turned
+off in order for the krb5.conf redployment to occur. In reality, the Kerberos 
+config does not have to redeployed because it obviusly originates from the Master
+node where the KDC server is itself installed. CM is naive to this, so the warning
+can be disregarded.
+
+```
