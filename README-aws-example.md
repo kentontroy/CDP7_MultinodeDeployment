@@ -27,6 +27,7 @@ Sandbox tenant
 vpc-0d5b3e9226632d04d / kdavis-vpc
 10.0.0.0/16
 
+Refer to: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html#AmazonDNS
 Enable the options for DNS Host naming and DNS Resolution for the VPC
 
 AWS Subnet
