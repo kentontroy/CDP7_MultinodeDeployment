@@ -27,11 +27,14 @@ Sandbox tenant
 vpc-0d5b3e9226632d04d / kdavis-vpc
 10.0.0.0/16
 
+Enable DNS Host naming and DNS Resolution for the VPC
+
 AWS Subnet
 ----------
 kdavis-subnet-1 10.0.0.0/19, subnet-0575887bb905ccf04
 kdavis-subnet-2 10.0.160.0/19
 kdavis-subnet-3 10.0.64.0/19
+
 
 AWS Security Group
 --------------
