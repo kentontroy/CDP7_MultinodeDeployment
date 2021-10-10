@@ -27,7 +27,7 @@ Sandbox tenant
 vpc-0d5b3e9226632d04d / kdavis-vpc
 10.0.0.0/16
 
-Enable DNS Host naming and DNS Resolution for the VPC
+Enable the options for DNS Host naming and DNS Resolution for the VPC
 
 AWS Subnet
 ----------
