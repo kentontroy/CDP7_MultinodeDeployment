@@ -165,7 +165,7 @@ For this case, you could SSH into the specific cluster node:
 
 $ wget --user <USERNAME> --password <PASSWORD> https://archive.cloudera.com/p/cm7/7.4.4/redhat7/yum/RPMS/x86_64/cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
 
-$ sudo rpm -ivh cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
+$ sudo mv cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm /etc/yum.repos.d
 
 Then, in the Docker container, add a tag so that Ansible skips this task when re-run.
 
