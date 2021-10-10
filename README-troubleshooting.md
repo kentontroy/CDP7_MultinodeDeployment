@@ -163,9 +163,20 @@ Cloudera Manager producers for each node during install.
 
 For this case, you could SSH into the specific cluster node:
 
-$ wget --user <USERNAME> --password <PASSWORD> https://archive.cloudera.com/p/cm7/7.4.4/redhat7/yum/RPMS/x86_64/cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm
+$ sudo wget --user <USERNAME> --password <PASSWORD> https://archive.cloudera.com/p/cm7/7.4.4/redhat7/yum/cloudera-manager.repo -P /etc/yum.repos.d/
 
-$ sudo mv cloudera-manager-daemons-7.4.4-15850731.el7.x86_64.rpm /etc/yum.repos.d
+$ sudo vi /etc/yum.repos.d/cloudera-manager.repo
+
+[cloudera-manager]
+name=Cloudera Manager 7.4.4
+# Replace changeme:changeme with your paywall username and password below.
+baseurl=https://<USERNAME>:<PASSWORD>@archive.cloudera.com/p/cm7/7.4.4/redhat7/yum/
+gpgkey=https://changeme:changeme@archive.cloudera.com/p/cm7/7.4.4/redhat7/yum/RPM-GPG-KEY-cloudera
+gpgcheck=0
+enabled=1
+autorefresh=0
+type=rpm-md
+
 
 Then, in the Docker container, add a tag so that Ansible skips this task when re-run.
 
