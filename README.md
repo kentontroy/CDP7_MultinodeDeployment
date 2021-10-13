@@ -242,3 +242,5 @@ Use cm node ( 4xlarge ) to get into CM to verify the cluster status above, Ex: 3
 	Pwd: admin/admin
 
 Login into AWS, check AWS EC2 instance , you will be able to see following instances created has 3 Worker nodes(2xlarge+100gb) and 1 (4xlarge+100gb) master nodes
+
+You can vew the hosts that were created (i.e. their public IPs, local IPs, and roles) by looking at the ansible_hosts.yml produced in the mn-script directory.
