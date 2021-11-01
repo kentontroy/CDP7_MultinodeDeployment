@@ -2,7 +2,8 @@
 Automation for Cloudera Data Platform 7.x multinode deployment with Kerberos, KMS and TLS
 
 CDP Multinode script using Docker on Mac/Windows 10
-This will create brand new 5 instances on AWS( 1 -4xlarge for master and 3- 2xlarge worker nodes and 1- xlarge gateway node)
+This will create brand new 5 instances on AWS( 1  master and 3  worker nodes and 1 gateway node)
+The instance types can be customized
 CDP DC will be installed with full security (Kerberos,TLS and KMS)
 
 Forked from Harsh's last updates on June 20, 2020 --
@@ -27,7 +28,7 @@ README-aws-example.md <br>
 
 ## AWS Dependencies:
 
- 1.  AWS keypair (e.g. “.pem”) files to use with the scripts
+ 1. AWS keypair (e.g. “.pem”) files to use with the scripts
  2. Decide on AWS region/AZ (us-east-1 used in this example)
  3. Ensure an equivalent CentOS image is available in your AZ,Example: ami-02eac2c0129f6376b #CentOS-7x86_64 
  4. Create a VPC(or use default), subnet and Security Group (SG) where these nodes are in the same AZ. 
@@ -45,56 +46,31 @@ README-aws-example.md <br>
 
 ### Docker Setup:
 
-On both Windows and Mac OS, Following commands are used to setup the environment.
+On both Windows and Mac OS, Following commands are used to setup the environment --
 	
 We will execute the scripts to setup the 6-node cluster with all the relevant services. Kerberos,KMS and TLS will be setup by default. 
 	
 
  1. Ensure docker desktop has been installed and is running without any issues on your laptop.
  2. Open a terminal on mac and command prompt on a windows machine. The set of instructions work on both Mac OS and Windows.
- 3. $docker run -it fedora /bin/bash, you will see docker id as example below. 
-					
-		...@077d2b4577cfb/mn-script#] exit;
+ 3. git clone https://github.com/kentontroy/CDP7_MultinodeDeployment
+ 4. cd CDP7_MultinodeDeployment
+ 5. docker build -t cdp-ansible:latest .
+ 6. docker run --name cdp-ansible -d -it --volume $HOME:<YOUR DIR NAME> cdp-ansible:latest /bin/bash
+ 7. docker exec -it cdp-ansible /bin/bash
 	
-    Make a note the ID  "77d2b4577cfb" . Use this id to run the next command. 
- 4. Execute the following command (Use the ID from command above)
-
-		$docker commit 77d2b4577cfb  myfedora 
+In Docker --
 	
-
- 5. **IMPORTANT:** Mounting your local Mac drive  /Users/\<dir-name-here> to Docker /home/\<dir-name-here>
-		
-		Mac Example: $docker run -it --volume /Users/hshah:/home/hshah myfedora /bin/bash
-		Windows Example: $docker run -it --volume C:\Users\hshah:/home/hshah myfedora /bin/bash
-		
-
- 6.  At this time,you have a docker image with all the relevant files mapped to your home directory eg: /home/hshah. Next,we will prep the docker container and customize these files. 
- 7. Install python3 and boto3 in your Docker image 
-	
-		[root@2e3f9e83cf7a  ~]# dnf update -y
-		[root@2e3f9e83cf7a  ~]# dnf install -y ansible python3-pip git  
-		[root@2e3f9e83cf7a  ~]# pip3 install boto boto3
-
- 8. **IMPORTANT:** Add SSH key on docker ( It is 2 step process )
-	NOTE: On windows, you will need to copy the .pem file to a native docker folder and run these commands. 
-	
-	Step 1 : This step produces agent pid as below
-	
-		$[root@2e3f9e83cf7a  ~]# eval 'ssh-agent -s'
+ 8. $[root@2e3f9e83cf7a  ~]# eval 'ssh-agent -s'
 		  
-		SSH_AUTH_SOCK=/var/folders/3m/xs2m6r7x7_qg8wp11ggy8l000000gp/T//ssh-ASHkKOqJ6PpS/agent.51910; export SSH_AUTH_SOCK;
- 		SSH_AGENT_PID=51911; export SSH_AGENT_PID;
-       		echo Agent pid 51911;
-		
-	Step2: Use ssh-add command and provide pem file location 
- 		
-		$[root@2e3f9e83cf7a  ~]# ssh-add /home/hshah/my_key.pem
-  		Identity added: /home/hshah/my_key.pem
-
+    SSH_AUTH_SOCK=/var/folders/3m/xs2m6r7x7_qg8wp11ggy8l000000gp/T//ssh-ASHkKOqJ6PpS/agent.51910; export SSH_AUTH_SOCK;
+    SSH_AGENT_PID=51911; export SSH_AGENT_PID;
+    echo Agent pid 51911;
+	
  9.  Adding key-vault : Create the ansible vault file in the root directory to store the private key. 
 Note:It will ask for password to create vault, remember the password as we will store this in a password file as the next step
         
-	[root@2e3f9e83cf7a  ~]# ansible-vault create keys.vault
+    [root@2e3f9e83cf7a  ~]# ansible-vault create keys.vault
 
  10. This will open up an editor similar to vi. Copy and paste your .pem contents, pay close attention at the indentation. Give the key name and space for " **|** ", **add 2 spaces for each line below key name** 
       
@@ -144,8 +120,8 @@ We will also need access to the vault, pem and password files that are stored in
 The home directory should be accessible via docker mapping of the folders. 
 
 
- 1. Open ../config/stock.infra.aws.yml file
- 2. Make changes to parameters in stock.infra.aws.krb.yml where it says \<replace me>. eg Owner,project,enddate,vpc,region,subnet and security group.
+ 13. Open ../config/stock.infra.aws.yml file
+ 14. Make changes to parameters in stock.infra.aws.krb.yml where it says \<replace me>. eg Owner,project,enddate,vpc,region,subnet and security group.
 
 		#defaults for all instance groups
 		region: <replace me> #provide AWS availability zone
@@ -175,8 +151,7 @@ The home directory should be accessible via docker mapping of the folders.
 			enddate: "06102020"
 			project: ansible-hshah-test
 
- 3. Open and modify filepath for license in stock.cluster.krb.yml. where it says **\<replace me>**
-
+ 15. Open and modify filepath for license in stock.cluster.krb.yml. where it says **\<replace me>**
 
 	See below:
 
@@ -186,7 +161,7 @@ The home directory should be accessible via docker mapping of the folders.
 		type: enterprise
 		filepath: <replace me> eg path: /test_2019_2020_Licenseinfo/test_2019_2020_cloudera_license.txt
 
- 4. Change the following information in config/stock.cluster.krb.yml
+ 16. Change the following information in config/stock.cluster.krb.yml
 
 	 Add the private_key value eg: {{ my_key }}
 	
@@ -194,7 +169,7 @@ The home directory should be accessible via docker mapping of the folders.
 	  		private_key: "{{ replace_key }}"
   		
 
- 5. Open /etc/ansible/ansible.cfg  make the following changes and save.
+ 17. Open /etc/ansible/ansible.cfg  make the following changes and save.
 
 	a) uncomment record_host_key
 	
@@ -207,7 +182,7 @@ The home directory should be accessible via docker mapping of the folders.
 		   vault_password_file = /home/hshah/vault-password-file
 	
 
- 6. Open /etc/ansible/hosts, add following 2 lines as below and save:
+ 18. Open /etc/ansible/hosts, add following 2 lines as below and save:
 
 		[local]
 		localhost
