@@ -45,3 +45,9 @@ AWS IGW
 -------
 igw-0ea7a2aff7a0f30c1 / kdavis-igw
 ```
+
+```
+The AMI id for the CentOS image used is region specific
+Check: https://www.centos.org/download/aws-images/
+Note: The AMI id is specified as a variable when invoking the Ansible playbook
+```
