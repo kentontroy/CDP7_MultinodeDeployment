@@ -74,26 +74,26 @@ In Docker --
 
  10. This will open up an editor similar to vi. Copy and paste your .pem contents, pay close attention at the indentation. Give the key name and space for " **|** ", **add 2 spaces for each line below key name** 
       
-      For Example: keys.vault, give a \<name>_key ex: my_key: | as shown below
+       For Example: keys.vault, give a \<name>_key ex: my_key: | as shown below
 	
-	my_key: |
-  	  -----BEGIN RSA PRIVATE KEY-----
-  	  Madsfdasagafgfdgfdsgadhdjasvfgaertqrecsf
-  	 [...]
-  	 dfasdgretwreaqghaduogihafdkghareoighfdk=
-  	 -----END RSA PRIVATE KEY-----
+	 my_key: |
+  	   -----BEGIN RSA PRIVATE KEY-----
+  	   Madsfdasagafgfdgfdsgadhdjasvfgaertqrecsf
+  	  [...]
+  	  dfasdgretwreaqghaduogihafdkghareoighfdk=
+  	  -----END RSA PRIVATE KEY-----
    
-    NOTE: Record the private key name (eg: my_key) which will be used later in the config files
+     NOTE: Record the private key name (eg: my_key) which will be used later in the config files
 	
-    You will be asked to enter a password. Save the password. You can use this password in case you want to view or edit the file at a later stage. Use ansible-       vault view or ansible-vault edit to make changes
+     You will be asked to enter a password. Save the password. You can use this password in case you want to view or edit the file at a later stage. Use ansible-        vault view or ansible-vault edit to make changes
 
-    First verify if the vault file was created:
+     First verify if the vault file was created:
 
-	[root@2e3f9e83cf7a  ~]# ls -ltr /home/hshah/keys.vault
+	 [root@2e3f9e83cf7a  ~]# ls -ltr /home/hshah/keys.vault
 
-    You can use the following command to edit the ansible key vault file:
+     You can use the following command to edit the ansible key vault file:
 
-	[root@373dab68775b  ~]# ansible-vault edit keys.vault
+	 [root@373dab68775b  ~]# ansible-vault edit keys.vault
 	   
 
  11. On docker, let's now create a simple file to store the Vault password, so you won't be prompted at runtime, create the file under your home directory
@@ -101,7 +101,7 @@ In Docker --
 	[root@2e3f9e83cf7a  ~]# echo "YourPassword" > vault-password-file	
 	[root@2e3f9e83cf7a  ~]# chmod 400 vault-password-file
 		
-     NOTE: Record the file path and file name. We will use it in the config files
+      NOTE: Record the file path and file name. We will use it in the config files
 
 
  12. On docker, export the variables for the AWS keys as below:
