@@ -197,6 +197,16 @@ vi roles/cdpdc_cm_server/tasks/redhat.yml
       - cloudera-manager-server
     state: latest  
 ```
+## Ensure that private DNS is enabled for the VPC
+```
+enableDnsHostnames and enableDnsSupport should be checked when creating the VPC in use
+
+This creates a private hosted zone with resolution occurring within the VPC.
+e.g. if the VPC subnet is 10.0.0.0/19, then nslookup resolves to:
+Server:         10.0.0.2
+Address:        10.0.0.2#53
+```
+
 ## After installation, warnings within the CM Console
 ```
 To support Phoenix, HBase Write-Ahead Log Codec Class should be set to:
