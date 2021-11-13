@@ -1,12 +1,10 @@
-# CDP7_MultinodeDeployment
+# Cloudera CDH Multinode Deployment
 Automation for Cloudera Data Platform 7.x multinode deployment with Kerberos, KMS and TLS
 
 CDP Multinode script using Docker on Mac/Windows 10
 This will create brand new 5 instances on AWS( 1  master and 3  worker nodes and 1 gateway node)
 The instance types can be customized
 CDP DC will be installed with full security (Kerberos,TLS and KMS)
-
-Forked from Harsh's last updates on June 20, 2020 --
 
 See the following guides for forked updates -- <br>
 README-changes-in-forked-version.md <br>
