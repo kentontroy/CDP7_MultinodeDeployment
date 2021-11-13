@@ -1,3 +1,5 @@
+From Cloudera Documentation:
+https://docs.cloudera.com/runtime/7.2.0/cdp-security-overview/topics/security-authentication-with-knox.html
 <img src="./images/cm_knox_architecture.png" alt=""/><br>
 <img src="./images/cm_hive_on_tez_http_transport_mode.png" alt=""/><br>
 <img src="./images/cm_external_authn.png" alt=""/><br>
