@@ -1,4 +1,5 @@
 # Cloudera CDH Multinode Deployment
+```
 Automation for Cloudera Data Platform 7.x multinode deployment with Kerberos, KMS and TLS
 
 CDP Multinode script using Docker on Mac/Windows 10
@@ -10,11 +11,10 @@ See the following guides for forked updates -- <br>
 README-changes-in-forked-version.md <br>
 README-troubleshooting.md <br>
 README-aws-example.md <br>
-
+```
 
 ## **Assumptions**:
-
-
+```
  1. This document assumes that you have access to an AWS account
  2. Partners or their IT Dept can create their own VPC, Subnet, key-pair and security group in the same availability zone that will be used to create multi node instances in the script below.
  3. Request cloudera license from partner portal  
@@ -23,27 +23,27 @@ README-aws-example.md <br>
  6. Access to the following versions of docker are used for Mac OS and Windows 10 Pro. 
 		https://hub.docker.com/editions/community/docker-ce-desktop-mac/
 		https://hub.docker.com/editions/community/docker-ce-desktop-windows/
+```
 
 ## AWS Dependencies:
-
+```
  1. AWS keypair (e.g. “.pem”) files to use with the scripts
  2. Decide on AWS region/AZ (us-east-1 used in this example)
  3. Ensure an equivalent CentOS image is available in your AZ,Example: ami-02eac2c0129f6376b #CentOS-7x86_64 
  4. Create a VPC(or use default), subnet and Security Group (SG) where these nodes are in the same AZ. 
  5. Record the SG to be used in the config files. Make sure the SG is open to all hosts in security group.
-		
+```		
 
 ## Download scripts, CDP DC bits and license info:
-
- 
+```
  1. Download this Github repo and save the files to your home directory (e.g. Users/hshah) *NOTE: For Windows, avoid using space in folder-names.* 
  2. Copy the license file to this directory. You should have requested a trial license from the partner portal. 
  3. Copy the AWS  ".pem" file into a home directory
  4. Create a directory for the Github repo, eg: mn-script. unzip the files here.
-		
+```		
 
 ### Docker Setup:
-
+```
 On both Windows and Mac OS, Following commands are used to setup the environment --
 	
 We will execute the scripts to setup the 6-node cluster with all the relevant services. Kerberos,KMS and TLS will be setup by default. 
@@ -106,17 +106,15 @@ In Docker --
             
 		 export AWS_ACCESS_KEY_ID=AKIAQxxxxxx
 	  	 export AWS_SECRET_ACCESS_KEY=uOI3N5KQZ8zbxxxxxxxxxx
-	  	 
+```	  	 
 
-
-### Modify the configuration file:
-
+### Modify the Ansible configuration:
+```
 At this point, you should have the scripts/repo under a folder called mn-script. If you don't already have it within the mn-script folder under the home directory then download/clone this repo and move it under the home directory so that is accessible via the docker container.
 
 We will also need access to the vault, pem and password files that are stored in the home directory.
 
 The home directory should be accessible via docker mapping of the folders. 
-
 
  13. Open ../config/stock.infra.aws.yml file
  14. Make changes to parameters in stock.infra.aws.krb.yml where it says \<replace me>. eg Owner,project,enddate,vpc,region,subnet and security group.
@@ -199,7 +197,7 @@ After End of Successful Execution, You will see something like below as a Recap:
 	TASK [cdpdc_cm_server : reset var _api_command] ***********************************************************************************************************************************************
 	ok: [3.235.57.178]
 
-	PLAY RECAP ************************************************************************************************************************************************************************************
+	PLAY RECAP ****************************************************************************************************************************
 	3.235.151.211              : ok=31   changed=17   unreachable=0    failed=0    skipped=0    rescued=0    ignored=1
 	3.235.57.178               : ok=114  changed=43   unreachable=0    failed=0    skipped=6    rescued=0    ignored=1
 	34.239.93.193              : ok=31   changed=17   unreachable=0    failed=0    skipped=0    rescued=0    ignored=1
@@ -215,3 +213,4 @@ Use cm node ( 4xlarge ) to get into CM to verify the cluster status above, Ex: 3
 Login into AWS, check AWS EC2 instance , you will be able to see following instances created has 3 Worker nodes(2xlarge+100gb) and 1 (4xlarge+100gb) master nodes
 
 You can vew the hosts that were created (i.e. their public IPs, local IPs, and roles) by looking at the ansible_hosts.yml produced in the mn-script directory.
+```
