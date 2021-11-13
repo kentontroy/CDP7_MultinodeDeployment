@@ -7,10 +7,10 @@ This will create brand new 5 instances on AWS( 1  master and 3  worker nodes and
 The instance types can be customized
 CDP DC will be installed with full security (Kerberos,TLS and KMS)
 
-See the following guides for forked updates -- <br>
-README-changes-in-forked-version.md <br>
-README-troubleshooting.md <br>
-README-aws-example.md <br>
+See the following guides for forked updates -- 
+README-changes-in-forked-version.md 
+README-troubleshooting.md 
+README-aws-example.md 
 ```
 
 ## **Assumptions**:
