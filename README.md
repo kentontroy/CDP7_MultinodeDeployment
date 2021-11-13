@@ -36,7 +36,7 @@ README-knox-ranger-jdbc.md
  5. Record the SG to be used in the config files. Make sure the SG is open to all hosts in security group.
 ```		
 
-## Download scripts, CDP DC bits and license info:
+## Download scripts, CDP bits and license info:
 ```
  1. Download this Github repo and save the files to your home directory (e.g. Users/kdavis) *NOTE: For Windows, avoid using space in folder-names.* 
  2. Copy the license file to this directory. You should have requested a trial license from the partner portal. 
@@ -44,7 +44,7 @@ README-knox-ranger-jdbc.md
  4. Create a directory for the Github repo, eg: mn-script. unzip the files here.
 ```		
 
-### Docker Setup:
+### Use Docker:
 ```
 On both Windows and Mac OS, Following commands are used to setup the environment --
 	
