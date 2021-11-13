@@ -8,9 +8,11 @@ The instance types can be customized
 CDP DC will be installed with full security (Kerberos,TLS and KMS)
 
 See the following guides for forked updates -- 
+
 README-changes-in-forked-version.md 
 README-troubleshooting.md 
 README-aws-example.md 
+README-knox-ranger-jdbc.md
 ```
 
 ## **Assumptions**:
@@ -36,7 +38,7 @@ README-aws-example.md
 
 ## Download scripts, CDP DC bits and license info:
 ```
- 1. Download this Github repo and save the files to your home directory (e.g. Users/hshah) *NOTE: For Windows, avoid using space in folder-names.* 
+ 1. Download this Github repo and save the files to your home directory (e.g. Users/kdavis) *NOTE: For Windows, avoid using space in folder-names.* 
  2. Copy the license file to this directory. You should have requested a trial license from the partner portal. 
  3. Copy the AWS  ".pem" file into a home directory
  4. Create a directory for the Github repo, eg: mn-script. unzip the files here.
@@ -87,7 +89,7 @@ In Docker --
 
      First verify if the vault file was created:
 
-	 [root@2e3f9e83cf7a  ~]# ls -ltr /home/hshah/keys.vault
+	 [root@2e3f9e83cf7a  ~]# ls -ltr /home/kdavis/keys.vault
 
      You can use the following command to edit the ansible key vault file:
 
@@ -143,9 +145,9 @@ The home directory should be accessible via docker mapping of the folders.
 		public_key_id: "{{ public_key }}"
 		bootstrap: ""
 		tags:
-			owner: hshah
+			owner: kdavis
 			enddate: "06102020"
-			project: ansible-hshah-test
+			project: ansible-kdavis-test
 
  15. Open and modify filepath for license in stock.cluster.krb.yml. where it says **\<replace me>**
 
@@ -175,7 +177,7 @@ The home directory should be accessible via docker mapping of the folders.
 	b) uncomment value_password_file and specify the location of your vault password file.
 	
 		 # specifying --vault-password-File on the command line.
-		   vault_password_file = /home/hshah/vault-password-file
+		   vault_password_file = /home/kdavis/vault-password-file
 	
 
  18. Open /etc/ansible/hosts, add following 2 lines as below and save:
@@ -190,7 +192,7 @@ Now are ready to execute the ansible playbook from mn-script folder.
 
 Example:
 
-	ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" -e "cluster=config/stock.cluster.krb.yml" -e "vault=/home/hshah/keys.vault" -e "cdpdc_teardown=hshah-06102020" -e "public_key=my_key" -e "repo_username=abcd-1234-wxyz-6789" -e "repo_password=abcd1234"
+	ansible-playbook site.yml -e "infra=config/stock.infra.aws.yml" -e "cluster=config/stock.cluster.krb.yml" -e "vault=/home/kdavis/keys.vault" -e "cdpdc_teardown=kdavis-06102020" -e "public_key=my_key" -e "repo_username=abcd-1234-wxyz-6789" -e "repo_password=abcd1234"
 
 After End of Successful Execution, You will see something like below as a Recap:
 
