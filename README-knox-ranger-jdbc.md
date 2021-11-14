@@ -9,7 +9,7 @@ https://docs.cloudera.com/runtime/7.2.0/cdp-security-overview/topics/security-au
 <img src="./images/cm_ranger_audit.png" alt=""/><br>
 
 ## Use PAM external authentication to create a local user just for testing. 
-## AD or LDAP recommended for Production use cases
+### AD or LDAP recommended for Production use cases
 ```
 groupadd shadow
 usermod -G root,shadow root
