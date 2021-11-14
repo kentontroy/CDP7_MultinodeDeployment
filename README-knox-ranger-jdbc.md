@@ -37,4 +37,8 @@ keytool -import -trustcacerts -keystore /etc/pki/java/cacerts -storepass changei
 Remember to specify the knox_user name and password
 ```
 
+## Can also download Cloudera ODBC Drivers for testing
+```
+https://www.cloudera.com/downloads/connectors/hive/odbc/2-6-11.html
+```
 
