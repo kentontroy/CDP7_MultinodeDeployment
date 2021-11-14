@@ -7,7 +7,6 @@ https://docs.cloudera.com/runtime/7.2.0/cdp-security-overview/topics/security-au
 <img src="./images/cm_ranger_knox_policy.png" alt=""/><br>
 <img src="./images/cm_ranger_hadoop_sql_proxy.png" alt=""/><br>
 <img src="./images/cm_ranger_audit.png" alt=""/><br>
-<img src="./images/cm_tableau_settings.png" alt=""/><br>
 
 ## Use PAM external authentication to create a local user just for testing. 
 ### AD or LDAP recommended for Production use cases
@@ -47,3 +46,15 @@ https://www.cloudera.com/downloads/connectors/hive/odbc/2-6-11.html
 ```
 Log file: /var/log/knox/gateway/gateway.log
 ```
+
+## Tableau settings below for ODBC
+```
+HTTP Path = gateway/cdp-proxy-api/hive
+SSL CA = pem file e.g. knox.pem
+The certificate may reference a local host name depending upon the AWS configuration
+Can map to a resolvable name on your JDBC client via /etc/hosts entry. Example:
+<Resolvable IP address for Knox gateway> ip-10-0-22-6.ec2.internal
+```
+## Tableau settings below for ODBC
+<img src="./images/cm_tableau_settings.png" alt=""/><br>
+
