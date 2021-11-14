@@ -42,3 +42,7 @@ Remember to specify the knox_user name and password
 https://www.cloudera.com/downloads/connectors/hive/odbc/2-6-11.html
 ```
 
+## Troubleshoot Knox connectivity issues
+```
+Log file: /var/log/knox/gateway/gateway.log
+```
