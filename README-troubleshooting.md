@@ -2,9 +2,7 @@
 ```
 Ansible use Jinja2 templating for variables and dynamic expressions.
 
-Jinja2 doesn't behave very well with variables containing dashes. For example, over an hour was lost
-trying to understand the reason behind an undefined variable. See how to debug below. The ultimate reason 
-was due to a PEM file being used that had dashes in the name.
+Jinja2 doesn't behave very well with variables containing dashes. Avoid PEM files with dashes in the name.
 ```
 
 ## Debugging
