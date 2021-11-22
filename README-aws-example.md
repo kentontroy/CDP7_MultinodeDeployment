@@ -56,7 +56,7 @@ Note: The AMI id is specified as a variable when invoking the Ansible playbook
 ```
 
 ```
-Generate a Windows *.ppk from the PEM file used by the EC2 instances
+Generate a Windows *.ppk from the *.pem file used by the EC2 instances
 --------------------------------------------------------------------
 
 sudo yum install putty
