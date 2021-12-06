@@ -119,7 +119,7 @@ We will also need access to the vault, pem and password files that are stored in
 The home directory should be accessible via docker mapping of the folders. 
 
  13. Open ../config/stock.infra.aws.yml file
- 14. Make changes to parameters in stock.infra.aws.krb.yml where it says \<replace me>. eg Owner,project,enddate,vpc,region,subnet and security group.
+ 14. Make changes to parameters in stock.infra.aws.yml where it says \<replace me>. eg Owner,project,enddate,vpc,region,subnet and security group.
 
 		#defaults for all instance groups
 		region: <replace me> #provide AWS availability zone
