@@ -37,6 +37,11 @@ keytool -import -trustcacerts -keystore /etc/pki/java/cacerts -storepass changei
 Remember to specify the knox_user name and password
 ```
 
+## URL for Livy via Knox
+```
+curl -k -X GET -u knox_user:password https://<Knox gateway host>:8443/gateway/cdp-proxy-api/livy/sessions -H "Content-Type: application/json"
+```
+
 ## Can also download Cloudera ODBC Drivers for testing
 ```
 https://www.cloudera.com/downloads/connectors/hive/odbc/2-6-11.html
